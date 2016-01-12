@@ -47,6 +47,7 @@ module.exports = {
     });
   },
 
+  //-------------------User----------------------------------------//  
   newUser: function(user) {
     db.User.create(user)
     .then(function(newUser) {
@@ -54,6 +55,7 @@ module.exports = {
     });
   },
 
+  //Used for Passport line 43 of server.js
   isUserInDb: function(uname, callback) {
     db.User.count({
       where: {
@@ -65,7 +67,7 @@ module.exports = {
       return;
     });
   },
-
+  //-------------------Authorization----------------------------------------//
   isUserTeacher: function(uname, callback) {
     db.User.find({
       where: {
