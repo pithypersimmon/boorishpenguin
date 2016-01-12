@@ -5,10 +5,12 @@
     <div class="dropdown-form form-group">
       <label class="dropdown-label">Course</label>
       <select class="form-control" name="courseSelect" ng-model="courseOptions.selectedOption" ng-options="option.name for option in courseOptions.availableOptions track by option.id"></select>
+      <input ng-model="courseOptions.selectedOption">
     </div>
     <div class="dropdown-form form-group">
       <label class="dropdown-label">Topic</label>
       <select class="form-control" name="tagSelect" ng-model="tagOptions.selectedOption" ng-options="option.name for option in tagOptions.availableOptions track by option.id"></select>
+      <input ng-model="tagOptions.selectedOption">
     </div>
     <div class="form-group">
     <input class="form-control" type='question' ng-model='question.title'  size = "50" placeholder='What is your question?'>
