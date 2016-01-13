@@ -42,6 +42,13 @@ angular.module('boorish.ask', [])
         $location.path('/questions'); // redirects to all questions
       });
 
+    };
+
+
+    $scope.embedder = function(){
+      embedLink($scope.question.url).then(function(data){
+        $scope.question.embedData = data;
+      });
     }
   }
 
