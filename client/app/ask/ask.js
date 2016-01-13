@@ -34,8 +34,10 @@ angular.module('boorish.ask', [])
 
     $scope.addQuestion = function() {
       $scope.question.userId = $window.localStorage.getItem('com.boorish');  // pulls userId from localStorage
-      $scope.question.course = $scope.courseOptions.selectedOption.name; // pulls selected course
-      $scope.question.tag = $scope.tagOptions.selectedOption.name;  // pulls selected tag
+      $scope.question.course = $scope.question.course || $scope.courseOptions.selectedOption.name; // pulls selected course
+      console.log($scope.question.course);
+      $scope.question.tag = $scope.question.tag || $scope.tagOptions.selectedOption.name;  // pulls selected tag
+      console.log($scope.question.tag);
       Questions.addQuestion($scope.question).then(function() { // adds new Question with addQuestion factory method
         $location.path('/questions'); // redirects to all questions
       });
