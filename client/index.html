@@ -25,7 +25,7 @@
 
           <div class="dropdown">
             <a href="" class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              <img src="https://pixabay.com/static/uploads/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" width="32" height="32">
+              <div id="profileImg"><img src='https://pixabay.com/static/uploads/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' width='32' height='32'></div>
               <!--<span class="caret"></span>-->
             </a>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
@@ -40,6 +40,10 @@
             <span class="glyphicon glyphicon-edit"></span>
             <span>Ask</span>
           </a>
+          <a href="" id="logout">
+            <span class="glyphicon glyphicon-log-out"></span>
+            <span>Log Off</span>
+          </a>
         </div>
       </div>
     </div>
@@ -50,6 +54,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular-route/angular-route.js"></script>
+    <script>
+      $("#logout").on("click", function(){
+        localStorage.removeItem("com.boorish");
+        localStorage.removeItem("image");
+        document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8001"
+      })
+
+      if(localStorage.getItem("com.boorish")){
+        $("#profileImg").html("<img src="+ localStorage.getItem('image')+ " width='32' height='32'>")
+      }
+    </script>
 <!--     // <script src="http://timeago.yarp.com/jquery.timeago.js"></script>
  -->
     <script src="app/users/users.js"></script>

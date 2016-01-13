@@ -22,6 +22,7 @@ require('./config/routes.js')(app, express, googleAuth.ensureAuth);
 app.listen(port);
 module.exports = app;
 
+
 /* If you decide to move passport functionality to another file make sure you use the same instance of passport
 rather than requiring passport in multiple files */
 passport.serializeUser(function(user, done) {

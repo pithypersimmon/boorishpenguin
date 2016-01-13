@@ -4,6 +4,12 @@ var userControllers = require ('../controllers/userControllers.js');
 var courseControllers = require ('../controllers/courseControllers.js');
 var tagControllers = require ('../controllers/tagControllers.js');
 var passport = require('passport');
+var USER = require("../../client/user")
+
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+}
 
 
 module.exports = function(app, express, ensureAuth) {
@@ -34,6 +40,9 @@ module.exports = function(app, express, ensureAuth) {
   app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   function(req, res) {
+    console.log("picture",req.user.profile.photos[0].value);
+    USER.image = req.user.profile.photos[0].value
+
     // sends user to questions page after they successfully login
     res.redirect('/#/questions');
   });

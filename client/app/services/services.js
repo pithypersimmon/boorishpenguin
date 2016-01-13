@@ -1,3 +1,5 @@
+
+
 angular.module('boorish.services', [])
 
 // Questions factory handles all requests to add, retrieve, or modify questions in the database
@@ -208,6 +210,7 @@ angular.module('boorish.services', [])
       })
       .then(function (res) {
         user.google = res.data.email || res.data.profile.emails[0].value;
+        var userData = res.data.profile;
 
         return $http({
           method: 'GET',
@@ -224,6 +227,8 @@ angular.module('boorish.services', [])
           }
           if (isUser) {
             $window.localStorage.setItem('com.boorish', user.id);
+            $window.localStorage.setItem('image', JSON.stringify(userData.photos[0].value));
+
           } else {
             $location.path('/signin');
           }
