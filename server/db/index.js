@@ -32,7 +32,12 @@ var User = db.define('User', {
 });
 
 var Tag = db.define('Tag', {
-  name: Sequelize.STRING
+  name: Sequelize.STRING,
+  count: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0
+  } 
 }, {
   timestamps: false
 });
