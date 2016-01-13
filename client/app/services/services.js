@@ -58,6 +58,13 @@ angular.module('boorish.services', [])
         method: 'DELETE',
         url: 'townhall/questions/' + questionID
       })
+    },
+    
+    embedLink: function(link) {
+      return $http({
+        method: 'GET',
+        url: 'http://api.embed.ly/1/oembed?key=3666f1ee1b734342acf291ec68b9196d&url='+link
+      })
     }
   }
 })
