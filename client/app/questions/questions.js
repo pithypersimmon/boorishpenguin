@@ -21,3 +21,5 @@ angular.module('boorish.questions', [])
     $scope.init();
   }
 });
+
+//TODO: ASYNC between setUSER and checking auth
