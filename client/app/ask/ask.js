@@ -50,6 +50,12 @@ angular.module('boorish.ask', [])
         console.log(data.data);
       });
     }
+
+    $scope.embedder = function(){
+      embedLink($scope.question.url).then(function(data){
+        $scope.question.embedData = data;
+      });
+    }
   }
 
 
