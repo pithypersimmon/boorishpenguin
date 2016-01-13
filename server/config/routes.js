@@ -31,6 +31,7 @@ module.exports = function(app, express, ensureAuth) {
   app.get('/townhall/courses', ensureAuth, courseControllers.allCourses);
 
   app.get('/townhall/tags', ensureAuth, tagControllers.allTags);
+  app.post('/townhall/tags', ensureAuth, tagControllers.newTag);
 
   // Client does get request to /auth/google on signin
   app.get('/auth/google',
