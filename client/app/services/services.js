@@ -224,7 +224,7 @@ angular.module('boorish.services', [])
           url: '/townhall/users'
         })
         .then(function(res) {
-          var users = res.data.results;
+          var users = res.data.results || [];
           var isUser = false;
           for (var i = 0; i < users.length; i++) {
             if (users[i].email === user.google) {

@@ -2,7 +2,7 @@ angular.module('boorish.questions', [])
 
 .controller('questionsController', function($scope, $location, Questions, Auth) {
   $scope.questions = [];
-  Auth.setUser();
+
 
   $scope.init = function() {
 
@@ -14,12 +14,21 @@ angular.module('boorish.questions', [])
 
 
   // if user is not authenticated, reroute to /signin
-  if (!Auth.isAuth()) {
-    $location.path('/signin') 
-  // else show questions
+  Auth.setUser().then(function(){
+
+  })
+
+  if(Auth.isAuth()){
+    $scope.init()
   } else {
-    $scope.init();
+    $location.path('/signin')
   }
+  //if (!Auth.isAuth()) {
+  //  $location.path('/signin')
+  //// else show questions
+  //} else {
+  //  $scope.init();
+  //}
 });
 
 //TODO: ASYNC between setUSER and checking auth
