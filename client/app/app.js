@@ -5,6 +5,7 @@ angular.module('boorishpenguin', [
   'boorish.questions',
   'boorish.answers',
   'boorish.auth',
+  'boorish.admin',
   'ngRoute'
   ])
 
