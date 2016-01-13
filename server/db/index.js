@@ -56,21 +56,26 @@ var Post = db.define('Post', {
     allowNull: false,
     defaultValue: 0
   },
+  //When is this touched and shouldn't it point to the
+  //question not the responses?
   responses: {
     type: Sequelize.INTEGER,
     allowNull: false,
     defaultValue: 0
   },
+  //Why is this necessary what does it do
   isAnswered: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
     defaultValue: false
   },
+  //Good means the admin has checked it off
   isGood: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
     defaultValue: false
   },
+  //What's this mean?
   isClosed: {
     type: Sequelize.BOOLEAN,
     allowNull: false,

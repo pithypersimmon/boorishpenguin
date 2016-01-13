@@ -3,12 +3,16 @@ var UCtrl = require('./userControllers.js');
 
 module.exports = {
   allQuestions: function(req, res) {
+    // This is necessary because our Post schema 
+    // contains both answers and questions
     db.Post.findAll({
       where: {
         isAnAnswer: false
       },
       include: [db.User, db.Course, db.Tag]
     })
+    //Format the array of questions into objects that our
+    //front end will use
     .then(function(questions) {
       var formattedQs = questions.map(function(question) {
         return {
@@ -35,7 +39,8 @@ module.exports = {
       res.json(questions);
     });
   },
-
+  // New question takes title, text, coursename,
+  // tagname(s?) and user id
   newQuestion: function(req, res) {
     var titl = req.body.title;
     var txt = req.body.text;
@@ -44,16 +49,19 @@ module.exports = {
     var uid = req.body.id_user;
 
     db.User.findById(uid)
+    // Points for each question you post you make
     .then(function(user) {
       user.update({
         points: user.points + 1
       })
+      // Need to do this because it is a reference
       .then(function() {
         db.Course.findOne({
           where: {
             name: coursename
           }
         })
+        // Need to do this because it is a reference
         .then(function(course) {
           db.Tag.findOne({
             where: {
@@ -89,8 +97,9 @@ module.exports = {
       db.User.findById(uid)
       .then(function(user){
         var authorname = user.username;
-
+        // Only allows you to delete question if you're a teacher
         UCtrl.isUserTeacher(reqName, function(is) {
+          //You can only delete things that you have authored?
           if (is || reqName === authorname) {
             user.update({
               points: user.points - 1
@@ -110,7 +119,8 @@ module.exports = {
       });
     });
   },
-
+  // What the heck does this do?
+  // Might break out into the individual view
   readQuestion: function(req, res) {
     var qid = req.params.id;
 
@@ -178,9 +188,13 @@ module.exports = {
       }
     })
     .then(function(question) {
+      // Approved by teacher
       var curGood = question.isGood;
+      //Get a point anytime there is like
       var curLike = question.points;
+      //Deleted? by teacher?
       var curClosed = question.isClosed;
+      //Teacher admin power?
       var curAnswered = question.isAnswered;
 
       db.User.findOne({
@@ -188,6 +202,7 @@ module.exports = {
           id: question.UserId
         }
       })
+
       .then(function(user) {
         var authorname = user.username;
 
@@ -202,6 +217,8 @@ module.exports = {
               where: ['UserId='+requester.id+' AND PostId='+question.id]
             })
             .then(function(result) {
+
+              //I think this if else checks to see if you've liked stuff yet?
               if (!result.length) {
                 return question.addVote(requester)
                 .then(function() {
@@ -227,12 +244,19 @@ module.exports = {
                   });
                 });
               }
+              //End of else statement
             });
           })
           .then(function() {
             res.status(201).json(question);
           });
+
+        // This is all teacher stuff because the like is the only thing
+        // that is the only thing done by students   
         } else {
+
+          // Checks if it is a teacher 
+          // or student that posted the question 
           UCtrl.isUserTeacher(reqName, function(is) {
             if (mod === 'answered' && (reqName === authorname || is)) {
               question.update({
@@ -242,6 +266,8 @@ module.exports = {
                 res.status(201).json(question);
               });
             }
+
+            //Checks if you're a teacher
             else if (is) {
               if (mod === 'good') {
                 // admin only
@@ -268,6 +294,7 @@ module.exports = {
               } else {
                 res.sendStatus(404);
               }
+            //If you're not a teacher peace.  
             } else {
               res.sendStatus(404);
             }
