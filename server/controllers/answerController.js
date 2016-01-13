@@ -7,15 +7,20 @@ module.exports = {
     var uid = req.body.id_user;
     var qid = req.body.id_question;
 
+    // find post by ID
     db.Post.findById(qid)
     .then(function(question) {
+      // if the question is open
       if (!question.isClosed) {
+        // increment question responses by 1
         question.update({
           responses: question.responses + 1
         })
+        // grab answer author by user id
         .then(function() {
           return db.User.findById(uid);
         })
+        // insert answer
         .then(function(user) {
           db.Post.create({
             text: txt,
@@ -26,10 +31,12 @@ module.exports = {
             TagId: question.TagId
           })
           .then(function(answer) {
+            // update question with db based timestamp
             question.update({
               updatedAt: Sequelize.fn('NOW')
             })
             .then(function() {
+              // increment answer author points by 1
               return user.update({
                 points: user.points + 1
               });
@@ -54,14 +61,19 @@ module.exports = {
     .then(function(answer) {
       var uid = answer.UserId;
 
+      // grab answer author by id
       db.User.findById(uid)
       .then(function(user) {
+        // check if the mod operation is 'good' (admin functionality to label questions)
         if (mod === 'good') {
+          // check if user from reqName is a teacher
           UCtrl.isUserTeacher(reqName, function(is) {
             if (is) {
+              // update answer isGood
               answer.update({
                 isGood: !answer.isGood
               })
+              // if answer is good, add a user point
               .then(function(answer) {
                 if (answer.isGood) {
                   return user.update({
@@ -80,12 +92,14 @@ module.exports = {
               res.sendStatus(404);
             }
           });
+        // if mod operation is 'like'
         } else if (mod === 'like') {
           db.User.find({
             where: {
               username: reqName
             }
           })
+          // find author of post to increment answer vote and increment user point
           .then(function(requester) {
             return answer.getVote({
               where: ['UserId='+requester.id+' AND PostId='+answer.id]
