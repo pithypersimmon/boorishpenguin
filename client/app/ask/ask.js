@@ -44,12 +44,6 @@ angular.module('boorish.ask', [])
 
     };
 
-    $scope.embedder = function(){
-      Questions.embedLink($scope.question.url).then(function(data){
-        $scope.question.embedData = data.data;
-        console.log(data.data);
-      });
-    }
 
     $scope.embedder = function(){
       embedLink($scope.question.url).then(function(data){
