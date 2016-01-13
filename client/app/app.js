@@ -35,6 +35,10 @@ angular.module('boorishpenguin', [
       templateUrl: 'app/auth/signin.html',
       controller: 'AuthController'
     })
+    .when('/admin', {
+        templateUrl: 'app/admin/admin.html',
+        controller: 'adminController'
+      })
     .otherwise({
       routeTo: '/signin'
     })

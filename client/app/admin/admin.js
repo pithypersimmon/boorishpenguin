@@ -1,6 +1,6 @@
 angular.module('boorish.admin', [])
 
-    .controller('askController', function($scope) {
+    .controller('adminController', function($scope) {
 
 
 
