@@ -93,12 +93,13 @@ module.exports = {
     //Used for Post/Response
     var title = req.body.title;
     var text = req.body.text;
-    var uid = req.body.id_user;
+    var uid = req.body.user;
     //Prod Only
     var link = req.body.link || null;
     //Response Only
     //Check to see when we get these and how we get them
     var pid = req.body.id_question || null;
+    var resp = (pid !== null) ? 1 : 0;
     //How are we given type?
     db.Post.create({
       title: title,
@@ -106,7 +107,7 @@ module.exports = {
       link: link,
       UserId: uid,
       PostId: pid,
-      Type: (pid) ? 'Response' : 'Post' 
+      isAResponse: resp
 
     })
     .then(function(post) {
