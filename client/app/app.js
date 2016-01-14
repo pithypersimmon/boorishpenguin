@@ -23,7 +23,7 @@ angular.module('boorishpenguin', [
       templateUrl: 'app/questions/questions.html',
       controller: 'questionsController'
     })
-    .when('/questions/:id', {
+    .when('/products/:id', {
       templateUrl: 'app/answers/answers.html',
       controller: 'answersController'
     })
