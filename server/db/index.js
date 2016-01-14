@@ -69,6 +69,9 @@ var Post = db.define('Post', {
     allowNull: false,
     defaultValue: 0
   },
+  picture : {
+    type: Sequelize.STRING,
+  },
   createdAt: {
     type: Sequelize.DATE,
     defaultValue: Sequelize.fn('NOW')
