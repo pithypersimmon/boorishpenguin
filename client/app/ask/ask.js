@@ -31,13 +31,19 @@ angular.module('boorish.ask', [])
     //     selectedOption: data.results[data.results.length - 1]
     //   };
     // });
+    var embedly = {};
+    //call url link
 
     $scope.addQuestion = function() {
       $scope.question.userId = $window.localStorage.getItem('com.boorish');  // pulls userId from localStorage
       // $scope.question.course = $scope.question.course || $scope.courseOptions.selectedOption.name; // pulls selected course
       // console.log($scope.question.course);
       $scope.question.tag = $scope.question.tag || $scope.tagOptions.selectedOption.name;  // pulls selected tag
-      console.log($scope.question.tag);
+      
+      Questions.embedLink($scope.question.url).then(function(data) {
+        embedly = data.data;
+      });
+
       Questions.addProduct($scope.question).then(function() { // adds new Question with addQuestion factory method
         $location.path('/questions'); // redirects to all questions
       });
@@ -45,7 +51,7 @@ angular.module('boorish.ask', [])
     };
 
 
-    $scope.embedder = function(){
+    var embedder = function(){
       Questions.embedLink($scope.question.url).then(function(data){
         $scope.question.embedData = data.data;
       });

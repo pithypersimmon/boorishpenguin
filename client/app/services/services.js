@@ -46,7 +46,7 @@ angular.module('boorish.services', [])
     updateQuestion: function(id, mod) {
       return $http({
         method: 'POST',
-        url: 'townhall/questions/' + id,
+        url: 'townhall/products/' + id,
         data: { mod: mod } // possible mods = 'like' to increase like points, 'good' to mark as good (by teacher), 'answered', 'closed'
       })
     },
@@ -55,7 +55,7 @@ angular.module('boorish.services', [])
     removeQuestion: function(questionID) {
       return $http({
         method: 'DELETE',
-        url: 'townhall/questions/' + questionID
+        url: 'townhall/products/' + questionID
       })
     },
     
