@@ -99,6 +99,9 @@ var User = db.define('User', {
     type: Sequelize.INTEGER,
     allowNull: false,
     defaultValue: 0
+  },
+  picture : {
+    type: Sequelize.STRING,
   }
 }, {
   timestamps: false

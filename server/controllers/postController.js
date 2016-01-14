@@ -28,7 +28,13 @@ module.exports = {
           createdAt: product.createdAt,
           user: product.User.username,
           imgUrl: product.User.picture,
-          updatedAt: product.updatedAt
+          updatedAt: product.updatedAt,
+          provider_url: req.body.provider_url,
+          thumbnail_url: req.body.thumbnail_url,
+          provider_name: req.body.provider_name,
+          thumbnail_width: req.body.thumbnail_width,
+          thumbnail_height: req.body.thumbnail_height,
+          type: req.body.type
         };
       });
 
@@ -160,7 +166,13 @@ module.exports = {
       url: link,
       UserId: uid,
       PostId: pid,
-      isAResponse: resp
+      isAResponse: resp,
+      provider_url: req.body.provider_url || null,
+      thumbnail_url: req.body.thumbnail_url || null,
+      provider_name: req.body.provider_name || null,
+      thumbnail_width: req.body.thumbnail_width || null,
+      thumbnail_height: req.body.thumbnail_height || null,
+      type: req.body.type || null
     })
     .then(function(post) {
       res.status(201).json(post);
