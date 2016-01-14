@@ -10,6 +10,76 @@ var db = new Sequelize(database, dbUser, dbPass, {
   host: dbHost
 });
 
+
+var Post = db.define('Post', {
+  // used to define product or response
+  isAResponse: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    //JUST FOR NOW
+    defaultValue: false
+  },
+  postid: {
+    type: Sequelize.INTEGER,
+    allowNull: true
+  },
+  title: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  description: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  url: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  provider_url: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  thumbnail_width: {
+    type: Sequelize.INTEGER,
+    allowNull: true
+  },
+  thumbnail_height: {
+    type: Sequelize.INTEGER,
+    allowNull: true
+  },
+  thumbnail_url: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  version: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  provider_name: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  type: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  like_count: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0
+  },
+  response_count: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0
+  },
+  created: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.fn('NOW')
+  },
+  updated: Sequelize.DATE
+});
+
 var User = db.define('User', {
   username: Sequelize.STRING,
   fullname: Sequelize.STRING,
@@ -33,8 +103,7 @@ var User = db.define('User', {
     type: Sequelize.INTEGER,
     allowNull: false,
     defaultValue: 0
-  },
-  picture: Sequelize.STRING
+  }
 }, {
   timestamps: false
 });
@@ -45,53 +114,9 @@ var Tag = db.define('Tag', {
     type: Sequelize.INTEGER,
     allowNull: false,
     defaultValue: 0
-  } 
+  }
 }, {
   timestamps: false
-});
-
-
-var Post = db.define('Post', {
-  title: Sequelize.STRING,
-  text: Sequelize.STRING,
-  isAResponse: {
-    type: Sequelize.BOOLEAN,
-    allowNull: false,
-    //JUST FOR NOW
-    defaultValue: false
-  },
-  points: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    defaultValue: 0
-  },
-  link: {
-    type: Sequelize.STRING,
-    allowNull: true
-  },
-  like_count: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    defaultValue: 0
-  },
-  response_count: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    defaultValue: 0
-  },
-  //When is this touched and shouldn't it point to the
-  //question not the responses?
-  responses: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    defaultValue: 0
-  },
-  //Why is this necessary what does it do
-  createdAt: {
-    type: Sequelize.DATE,
-    defaultValue: Sequelize.fn('NOW')
-  },
-  updatedAt: Sequelize.DATE
 });
 
 var Like = db.define('Like', {
@@ -100,6 +125,7 @@ var Like = db.define('Like', {
 });
 
 var Post_Tag = db.define('Post_Tag', {
+  tag_name: Sequelize.STRING
   }, {
     timestamps: false
 });
@@ -107,25 +133,23 @@ var Post_Tag = db.define('Post_Tag', {
 User.hasMany(Post);
 Post.belongsTo(User);
 
-Post.hasMany(Post, {as: 'Responses', foreignKey: 'PostId'});
-
 // // set up many to many model for post and user on like
 User.belongsToMany(Post, {
-    as: 'relationship',
+    as: 'posts',
     through: 'Like'
 });
 Post.belongsToMany(User, {
-    as: 'relationship2',
+    as: 'users',
     through: 'Like'
 });
 
 // // set up many to many model for post and tag on post_tag
 Post.belongsToMany(Tag, {
-    as: 'relationship',
+    as: 'tags',
     through: 'Post_Tag'
 });
 Tag.belongsToMany(Post, {
-    as: 'relationship2',
+    as: 'posts',
     through: 'Post_Tag'
 });
 
@@ -138,8 +162,13 @@ User.sync()
 })
 .then(function() {
   return Like.sync();
+})
+.then(function() {
+  return Post_Tag.sync();
 });
 
 exports.User = User;
 exports.Tag = Tag;
 exports.Post = Post;
+exports.Like = Like;
+exports.Like = Post_Tag;
