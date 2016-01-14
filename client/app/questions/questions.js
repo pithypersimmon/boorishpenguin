@@ -2,6 +2,7 @@ angular.module('boorish.questions', [])
 
 .controller('questionsController', function($scope, $location, Questions, Auth) {
   $scope.questions = [];
+  $scope.trending = [];
 
 
   $scope.init = function() {
@@ -9,6 +10,10 @@ angular.module('boorish.questions', [])
     Questions.getAllQuestions().then(function(data) {
       $scope.questions = data.results;
     });
+
+    Trending.getTopTrending().then(function(data){
+      $scope.trending = data.results;
+    })
     
   };
 
