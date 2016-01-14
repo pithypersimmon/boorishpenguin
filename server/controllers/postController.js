@@ -160,7 +160,13 @@ module.exports = {
       url: link,
       UserId: uid,
       PostId: pid,
-      isAResponse: resp
+      isAResponse: resp,
+      provider_url: req.body.provider_url || null,
+      thumbnail_url: req.body.thumbnail_url || null,
+      provider_name: req.body.provider_name || null,
+      thumbnail_width: req.body.thumbnail_width || null,
+      thumbnail_height: req.body.thumbnail_height || null,
+      type: req.body.type || null
     })
     .then(function(post) {
       res.status(201).json(post);
