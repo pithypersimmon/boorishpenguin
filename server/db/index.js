@@ -131,21 +131,17 @@ Post.belongsTo(User);
 
 // // set up many to many model for post and user on like
 User.belongsToMany(Post, {
-    as: 'posts',
     through: 'Like'
 });
 Post.belongsToMany(User, {
-    as: 'users',
     through: 'Like'
 });
 
 // // set up many to many model for post and tag on post_tag
 Post.belongsToMany(Tag, {
-    as: 'tags',
     through: 'Post_Tag'
 });
 Tag.belongsToMany(Post, {
-    as: 'posts',
     through: 'Post_Tag'
 });
 

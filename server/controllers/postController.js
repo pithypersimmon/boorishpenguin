@@ -146,7 +146,7 @@ module.exports = {
     //Used for Post/Response
     var title = req.body.title;
     var text = req.body.text;
-    var uid = req.body.user;
+    var uid = req.body.id_user;
     //Prod Only
     var link = req.body.link || null;
     //Response Only
@@ -157,7 +157,7 @@ module.exports = {
     db.Post.create({
       title: title,
       text: text,
-      link: link,
+      url: link,
       UserId: uid,
       PostId: pid,
       isAResponse: resp
