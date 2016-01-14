@@ -19,15 +19,11 @@ var Post = db.define('Post', {
     //JUST FOR NOW
     defaultValue: false
   },
-  postid: {
-    type: Sequelize.INTEGER,
-    allowNull: true
-  },
   title: {
     type: Sequelize.STRING,
     allowNull: true
   },
-  description: {
+  text: {
     type: Sequelize.STRING,
     allowNull: true
   },
@@ -73,11 +69,11 @@ var Post = db.define('Post', {
     allowNull: false,
     defaultValue: 0
   },
-  created: {
+  createdAt: {
     type: Sequelize.DATE,
     defaultValue: Sequelize.fn('NOW')
   },
-  updated: Sequelize.DATE
+  updatedAt: Sequelize.DATE
 });
 
 var User = db.define('User', {
@@ -135,23 +131,21 @@ Post.belongsTo(User);
 
 // // set up many to many model for post and user on like
 User.belongsToMany(Post, {
-    as: 'posts',
     through: 'Like'
 });
 Post.belongsToMany(User, {
-    as: 'users',
     through: 'Like'
 });
 
 // // set up many to many model for post and tag on post_tag
 Post.belongsToMany(Tag, {
-    as: 'tags',
     through: 'Post_Tag'
 });
 Tag.belongsToMany(Post, {
-    as: 'posts',
     through: 'Post_Tag'
 });
+
+Post.hasMany(Post, {as: 'Responses', foreignKey: 'PostId'});
 
 User.sync()
 .then(function() {

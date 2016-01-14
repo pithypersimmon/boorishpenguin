@@ -15,7 +15,7 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 
 module.exports = function(app, express, ensureAuth) {
 
-  app.get('/townhall/products', ensureAuth, postController.allProducts);
+  app.get('/townhall/products',  postController.allProducts);
   app.get('/townhall/products/:id', ensureAuth, postController.readPost);
 
   app.post('/townhall/posts', ensureAuth, postController.newPost);
