@@ -50,7 +50,7 @@ module.exports = function(app, express, ensureAuth) {
   passport.authenticate('google', { failureRedirect: '/' }),
   function(req, res) {
     console.log("picture",req.user.profile.photos[0].value);
-    USER.image = req.user.profile.photos[0].value
+    USER.image = req.user.profile.photos[0].value || null;
 
     // sends user to questions page after they successfully login
     res.redirect('/#/questions');
