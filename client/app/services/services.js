@@ -219,6 +219,7 @@ angular.module('boorish.services', [])
         url: '/user'
       })
       .then(function (res) {
+            console.log(">>>>>>>>>>>", res)
         user.google = res.data.email || res.data.profile.emails[0].value;
         var userData = res.data.profile;
 
