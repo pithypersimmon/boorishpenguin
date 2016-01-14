@@ -161,7 +161,6 @@ module.exports = {
       UserId: uid,
       PostId: pid,
       isAResponse: resp
-
     })
     .then(function(post) {
       res.status(201).json(post);
