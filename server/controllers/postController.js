@@ -28,7 +28,13 @@ module.exports = {
           createdAt: product.createdAt,
           user: product.User.username,
           imgUrl: product.User.picture,
-          updatedAt: product.updatedAt
+          updatedAt: product.updatedAt,
+          provider_url: req.body.provider_url,
+          thumbnail_url: req.body.thumbnail_url,
+          provider_name: req.body.provider_name,
+          thumbnail_width: req.body.thumbnail_width,
+          thumbnail_height: req.body.thumbnail_height,
+          type: req.body.type
         };
       });
 
