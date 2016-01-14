@@ -19,7 +19,7 @@ module.exports = {
     .then(function(products) {
       var formattedProducts = products.map(function(product) {
         return {
-          id: product.id,
+          id: product.id,          
           title: product.title,
           text: product.text,
           isAResponse: false,
