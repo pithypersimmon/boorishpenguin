@@ -37,11 +37,11 @@ angular.module('boorish.answers', [])
   };
 
   $scope.addAnswer = function() {
-    var id_question = $scope.data.question.id;
-
     Users.getUserWithId().then(function(userID) { // grabs the userID
+      $scope.newAnswer.id_question = $scope.data.question.id;
+      $scope.newAnswer.type = "Response";
       $scope.newAnswer.user = userID; // adds the userID to the answer
-      Answers.addAnswer($scope.newAnswer, id_question).then(function() { // adds answer
+      Answers.addAnswer($scope.newAnswer).then(function() { // adds answer
         $scope.newAnswer.text = '';
         $scope.getQuestion(); // refreshes the view
       });

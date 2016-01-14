@@ -7,7 +7,7 @@ angular.module('boorish.questions', [])
 
   $scope.init = function() {
 
-    Questions.getAllQuestions().then(function(data) {
+    Questions.getAllProducts().then(function(data) {
       $scope.questions = data.results;
     });
 

@@ -38,7 +38,7 @@ angular.module('boorish.ask', [])
       // console.log($scope.question.course);
       $scope.question.tag = $scope.question.tag || $scope.tagOptions.selectedOption.name;  // pulls selected tag
       console.log($scope.question.tag);
-      Questions.addQuestion($scope.question).then(function() { // adds new Question with addQuestion factory method
+      Questions.addProduct($scope.question).then(function() { // adds new Question with addQuestion factory method
         $location.path('/questions'); // redirects to all questions
       });
 
