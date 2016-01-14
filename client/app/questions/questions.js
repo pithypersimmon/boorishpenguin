@@ -11,9 +11,9 @@ angular.module('boorish.questions', [])
       $scope.questions = data.results;
     });
 
-    Trending.getTopTrending().then(function(data){
-      $scope.trending = data.results;
-    })
+    // Trending.getTopTrending().then(function(data){
+    //   $scope.trending = data.results;
+    // })
     
   };
 
