@@ -26,7 +26,7 @@ module.exports = {
           points: product.points,
           responses: product.responses,
           createdAt: product.createdAt,
-          user: product.User.name,
+          user: product.User.username,
           imgUrl: product.User.picture,
           updatedAt: product.updatedAt
         };
@@ -35,9 +35,62 @@ module.exports = {
       products = {};
       products.results = formattedProducts;
       res.json(products);
-    });
+    });  
   },
+  /*
+  db.Post.findAll({
+    where: {
+      isAResponse: false
+    },
+    order: [["response_count","DESC"]],
+    
+    //This creates the rows that are references instead of 
+    //just the numbers
+    include: [db.User]
+  })
 
+  db.Post.findAll({
+    where: {
+      isAResponse: false
+    },
+    order: [["like_count","DESC"]],
+    
+    //This creates the rows that are references instead of 
+    //just the numbers
+    include: [db.User]
+
+
+
+  })
+
+  //Find Likes based on user ID
+  db.Likes.findAll(uid, {
+    where: {
+      id: uid
+    }
+    include: [db.Post]
+  })
+  .then(function (likes) {
+  var formatted(Likeds) = likes.map(function(like) {
+          return {
+            id: response.id,
+            text: response.text,
+            isAResponse: true,
+            points: response.points,
+            PostId: pid,
+            user: response.User.name,
+            userid: response.User.id,
+            createdAt: response.createdAt,
+            imgUrl: response.User.picture
+          };
+        });
+  })
+  //Only choose the likes that match the user ID
+  //Find Post and Responses based on this query
+  
+
+
+  */
   readPost: function(req, res) {
     var pid = req.params.id;
 
