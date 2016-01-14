@@ -7,22 +7,21 @@ angular.module('boorish.services', [])
 .factory('Questions', function($http, $location) {
   return {
     // add a question from /ask
-    addQuestion: function(question) {
-
+    addProduct: function(question) {
+      console.log(question.tag);
       return $http({
         method: 'POST',
         url: '/townhall/posts',
         data: JSON.stringify({
           text: question.text,
           id_user: question.userId,
-          course: question.course,  // these are not setup yet
           tag: question.tag,  // these are not setup yet
           title: question.title
         })
       })
     },
 
-    getAllQuestions: function() {
+    getAllProducts: function() {
 
       return $http({
         method: 'GET',
@@ -118,6 +117,9 @@ angular.module('boorish.services', [])
         url: 'townhall/answers/' + answerID
       })
     }
+
+
+
 
   }
 })
