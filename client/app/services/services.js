@@ -11,7 +11,7 @@ angular.module('boorish.services', [])
 
       return $http({
         method: 'POST',
-        url: '/townhall/questions',
+        url: '/townhall/posts',
         data: JSON.stringify({
           text: question.text,
           id_user: question.userId,
@@ -26,7 +26,7 @@ angular.module('boorish.services', [])
 
       return $http({
         method: 'GET',
-        url: '/townhall/questions/'
+        url: '/townhall/products/'
       })
       .then(function(res) {
         return res.data; // returns all questions

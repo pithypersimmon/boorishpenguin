@@ -1,8 +1,9 @@
 var questionControllers = require ('../controllers/questionController.js');
 var answerControllers = require ('../controllers/answerController.js');
 var userControllers = require ('../controllers/userControllers.js');
-var courseControllers = require ('../controllers/courseControllers.js');
+var postController = require ('../controllers/postController.js');
 var tagControllers = require ('../controllers/tagControllers.js');
+var likeController = require ('../controllers/likeController.js');
 var passport = require('passport');
 var USER = require("../../client/user")
 
@@ -13,22 +14,29 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 
 
 module.exports = function(app, express, ensureAuth) {
-  app.get('/townhall/questions', ensureAuth, questionControllers.allQuestions);
-  app.post('/townhall/questions', ensureAuth, questionControllers.newQuestion);
-  app.delete('/townhall/questions/:id', ensureAuth, questionControllers.deleteQuestion);
 
-  app.get('/townhall/questions/:id', ensureAuth, questionControllers.readQuestion);
-  app.post('/townhall/questions/:id', ensureAuth, questionControllers.modQuestion);
+  app.get('/townhall/products', ensureAuth, postController.allProducts);
+  app.get('/townhall/products/:id', ensureAuth, postController.readPost);
 
-  app.post('/townhall/answers', ensureAuth, answerControllers.newAnswer);
-  app.post('/townhall/answers/:id', ensureAuth, answerControllers.modAnswer);
-  app.delete('/townhall/answers/:id', ensureAuth, answerControllers.deleteAnswer);
+  app.post('/townhall/posts', ensureAuth, postController.newPost);
+  app.delete('/townhall/posts/:id', ensureAuth, postController.deletePost);
+  
+
+  // app.put('/townhall/likes/:id', ensureAuth, likeController.post);
+
+
+
+  // app.post('/townhall/answers', ensureAuth, answerControllers.newAnswer);
+  // app.post('/townhall/answers/:id', ensureAuth, answerControllers.modAnswer);
+  // app.delete('/townhall/answers/:id', ensureAuth, answerControllers.deleteAnswer);
+
+
+
 
   app.get('/townhall/users', ensureAuth, userControllers.allUsers);
   app.get('/townhall/users/:id', ensureAuth, userControllers.oneUser);
   app.post('/townhall/signup', userControllers.newUser);
 
-  app.get('/townhall/courses', ensureAuth, courseControllers.allCourses);
 
   app.get('/townhall/tags', ensureAuth, tagControllers.allTags);
   app.post('/townhall/tags', ensureAuth, tagControllers.newTags);

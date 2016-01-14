@@ -30,6 +30,8 @@ module.exports = {
       where: {
         pid: pid
       }
+
+      //why not include here
     })
     .then(function(post){
       //Increase or decrease like_count for Post

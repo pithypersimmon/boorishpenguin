@@ -94,7 +94,7 @@ module.exports = {
     var title = req.body.title;
     var text = req.body.text;
     var uid = req.body.id_user;
-    //Post Only
+    //Prod Only
     var link = req.body.link || null;
     //Response Only
     //Check to see when we get these and how we get them
