@@ -4,7 +4,11 @@ body {
 h3 {
   font-weight: bold;
   text-transform: uppercase;
-  color: #555555;
+  color: white;
+}
+
+h4 {
+  color: white
 }
 
 select {
@@ -57,6 +61,7 @@ select {
 }
 
 .question-list-item {
+  background-color: rgba(211, 211, 211, 0.1);
   border-bottom: 1px solid #eeeeee;
   padding: 5px 5px 15px 5px;
   width: 100%;
@@ -78,7 +83,7 @@ select {
 }
 
 .question-page-item {
-  background-color: rgb(248, 248, 248);
+  background-color: rgba(51, 51, 51, 0.3);
   /*border-top: 1px solid lightgray;*/
   /*border-bottom: 1px solid lightgray;*/
   padding: 5px 5px 15px 5px;
@@ -162,7 +167,9 @@ body {
   height: 90%;
   font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
   color: #fff;
-  background: url(http://all4desktop.com/data_images/original/4238051-background.jpg);
+  /*background: url(http://all4desktop.com/data_images/original/4238051-background.jpg);*/
+  background: url(http://www.planwallpaper.com/static/images/518079-background-hd.jpg);
+
 }
 
 html {
