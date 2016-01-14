@@ -168,6 +168,25 @@ angular.module('boorish.services', [])
   };
 })
 
+
+.factory('Trending', function($http) {
+
+  return {
+
+    //getTopTrending: function() {
+    //  return $http({
+    //    method: 'GET',
+    //    //TODO: Need route to get trending
+    //    url: '/townhall/trending'
+    //  })
+    //  .then(function(res) {
+    //    return res.data;
+    //  });
+    //}
+
+  };
+})
+
 // Tags and Course factories just pull Tags and Courses from the database
 
 .factory('Tags', function($http) {
@@ -224,7 +243,7 @@ angular.module('boorish.services', [])
           url: '/townhall/users'
         })
         .then(function(res) {
-          var users = res.data.results;
+          var users = res.data.results || [];
           var isUser = false;
           for (var i = 0; i < users.length; i++) {
             if (users[i].email === user.google) {
