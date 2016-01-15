@@ -172,6 +172,24 @@ angular.module('boorish.services', [])
   };
 })
 
+.factory('Links', function($http) {
+
+  return {
+
+    //getLinks: function() {
+    //  return $http({
+    //    method: 'GET',
+    //    //TODO: Need route to get trending
+    //    url: '/townhall/getLinks'
+    //  })
+    //  .then(function(res) {
+    //    return res.data;
+    //  });
+    //}
+
+  };
+})
+
 // Tags and Course factories just pull Tags and Courses from the database
 
 .factory('Tags', function($http) {

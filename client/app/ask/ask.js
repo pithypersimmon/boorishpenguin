@@ -7,8 +7,14 @@ angular.module('boorish.ask', [])
 ///// addQuestion: uses the addQuestion facotry to add question to the database
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-.controller('askController', function($scope, $window, $location, Tags, Courses, Questions, Auth) {
+.controller('askController', function($scope, $window, $location, Tags, Courses, Questions, Auth, Links) {
   $scope.question = {};
+  $scope.savedLinks = [];
+  $scope.getSaved = function(){
+    Links.getLinks().then(function(data){
+      $scope.savedLinks = data;
+    })
+  }
 
   if (!Auth.isAuth()) {
     $location.path('/signin');
@@ -68,11 +74,13 @@ angular.module('boorish.ask', [])
     };
 
 
+
     // var embedder = function(){
     //   Questions.embedLink($scope.question.url).then(function(data){
     //     $scope.question.embedData = data.data;
     //   });
     // }
+
   }
 
 
