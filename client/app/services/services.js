@@ -172,6 +172,34 @@ angular.module('boorish.services', [])
   };
 })
 
+.factory('Links', function($http) {
+
+  return {
+
+    //getLinks: function(id) {
+    //  return $http({
+    //    method: 'GET',
+    //    //TODO: Need route to get trending
+    //    url: '/townhall/getLinks/' + id
+    //  })
+    //  .then(function(res) {
+    //    return res.data;
+    //  });
+    //},
+    //deleteLink : function(id){
+    //  return $http({
+    //        method: 'GET',
+    //        //TODO: Need route to get trending
+    //        url: '/townhall/deleteLink/' + id
+    //      })
+    //      .then(function(res) {
+    //        return res.data;
+    //      });
+    //}
+
+  };
+})
+
 // Tags and Course factories just pull Tags and Courses from the database
 
 .factory('Tags', function($http) {
@@ -219,6 +247,7 @@ angular.module('boorish.services', [])
         url: '/user'
       })
       .then(function (res) {
+            console.log(">>>>>>>>>>>", res)
         user.google = res.data.email || res.data.profile.emails[0].value;
         var userData = res.data.profile;
 

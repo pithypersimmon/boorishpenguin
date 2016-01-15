@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 
 
-var database = process.env.DATABASE || 'test2';
+var database = process.env.DATABASE || 'pithypersimmons';
 var dbUser = process.env.DBUSER || 'root';
 var dbPass = process.env.DBPASS || "student";
 var dbHost = process.env.DBHOST || 'localhost';

@@ -29,7 +29,7 @@
               <!--<span class="caret"></span>-->
             </a>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-              <li><a href="#">Action</a></li>
+              <li><a href="#/ask" id="savedLinks">Saved Links</a></li>
               <li><a href="#">Another action</a></li>
               <li><a href="#">Something else here</a></li>
               <li role="separator" class="divider"></li>
@@ -60,6 +60,14 @@
         localStorage.removeItem("image");
         document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8001"
       })
+
+        $("#savedLinks").on('click', function(){
+
+            setTimeout(function(){
+                $('html,body').animate({scrollTop: $("#scroll").offset().top}, "slow")
+            }, 1000)
+
+        })
 
       if(localStorage.getItem("com.boorish")){
         $("#profileImg").html("<img src="+ localStorage.getItem('image')+ " width='32' height='32'>")
