@@ -32,7 +32,7 @@
 
           <div class="Title">{{ question.coursename }}</div>
           <div class="tag">{{ question.tagname }}</div>
-          <div>- asked by {{ question.user }} at {{ question.createdAt }}</div>
+              <div>- asked by {{ question.user }} at {{ question.createdAt | date:"MM/dd/yyyy 'at' h:mma"}}</div>
         </div>
         <hr>
       </div>
