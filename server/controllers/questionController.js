@@ -30,7 +30,8 @@ module.exports = {
           tagname: question.Tag.name,
           user: question.User.name,
           imgUrl: question.User.picture,
-          updatedAt: question.updatedAt
+          updatedAt: question.updatedAt,
+          like_count: question.like_count
         }
       });
 

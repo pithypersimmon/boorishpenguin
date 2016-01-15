@@ -21,11 +21,10 @@ angular.module('boorish.questions', [])
     var obj = {};
     obj.id_user = localStorage.getItem('com.boorish');
     obj.id_post = postid;
-    Questions.addLike(obj)
+    Questions.addLike(obj);
+    Questions.getAllProducts();
   }
 
-  //id_user
-  //id_post
 
   // if user is not authenticated, reroute to /signin
   Auth.setUser().then(function(){
