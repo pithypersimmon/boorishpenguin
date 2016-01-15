@@ -26,88 +26,61 @@ module.exports = {
     //Increase or Decrease likes for User_Post 
       db.Post.findOne({
         where: {
-          PostId: pid
+          id: pid
         }
         //why not include here
       })
       .then(function(post){
+        console.log("Promise after post");
         //Increase or decrease like_count for Post
-        post.updateAttributes({
-          like_count: liked ? like_count + 1 : like_count - 1
-        });
+        if (post){ 
+          post.updateAttributes({
+            like_count: liked ? post.like_count - 1 : post.like_count + 1
+          });
+        }
         //WHOAWHOAWHOA whats the order of this promise without a then into a return?
         // keep going
+        
         return db.User.findById(post.UserId);
       })
       .then(function(user) {
         return user.updateAttributes({
-          post_like_count: liked ? post_like_count + 1 : post_like_count - 1
+          post_like_count: liked ? user.post_like_count - 1 : user.post_like_count + 1
         });
+      })
+      .then(function() {
+        if ( liked ) {
+          db.Like.findOne({
+            where: { 
+              UserId: uid,
+              PostId: pid
+            },
+          })
+          .then(function(like){
+            return like.destroy({ force: true });
+          })
+          .then(function(id){
+            if (id) {
+              //send some sort of thing
+              res.send(id);
+            }
+          });
+        //there hasn't been a like
+        } else {
+          db.Like.create({
+            UserId: uid,
+            PostId: pid
+          })
+          .then(function(like){
+            res.status(201).json(like);
+          });
+        }
       });
-      res.send(liked);
+      
     });
   
-
+    //if the like exists already
   }
-  //   //if the like exists already
-  //   if ( liked ) {
-  //     db.Like.findOne({
-  //       where: { 
-  //         UserId: uid,
-  //         PostId: pid
-  //       },
-  //     })
-  //     .then(function(like){
-  //       return like.destroy();
-  //     })
-  //     .then(function(id){
-  //       if (id) {
-  //         res.sendStatus(204);
-  //       }
-  //     });
-  //   //there hasn't been a like
-  //   } else {
-  //     db.Like.create({
-  //       UserId: uid,
-  //       PostId: pid
-  //     })
-  //     .then(function(like){
-  //       res.status(201).json(like);
-  //     });
-  //   }
-  // }
-
-
-
-  // unlikePost: function(req, res) {
-  //   var pid = req.body.id_question;
-  //   var uid = req.body.id_user;
-    
-
-  //   //Decrease likes for User_Post 
-  //   db.Post.findOne({
-  //     where: {
-  //       pid: pid
-  //     }
-  //   })
-  //   .then(function(post){
-  //     //Decrease like_count for Post
-  //     post.updateAttributes({
-  //       like_count: like_count - 1
-  //     });
-  //     //WHOAWHOAWHOA whats the order of this promise without a then into a return?
-  //     // keep going
-  //     return db.User.findById(post.UserId);
-  //   })
-  //   .then(function(user) {
-  //     return user.updateAttributes({
-  //       post_like_count: post_like_count - 1
-  //     });
-  //   });
-
-  //   //Remove the like from the store
-    
-  // }
 
 };
 

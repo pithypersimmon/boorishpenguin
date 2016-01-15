@@ -22,7 +22,7 @@ module.exports = function(app, express, ensureAuth) {
   app.delete('/townhall/posts/:id', ensureAuth, postController.deletePost);
   
 
-  app.post('/townhall/likes', ensureAuth, likeController.likePost);
+  app.post('/townhall/likes', likeController.likePost);
 
 
 

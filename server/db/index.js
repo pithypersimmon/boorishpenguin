@@ -129,8 +129,8 @@ var Like = db.define('Like', {
 //     timestamps: false
 // });
 
-// User.hasMany(Post);
-// Post.belongsTo(User);
+User.hasMany(Post);
+Post.belongsTo(User);
 
 // set up many to many model for post and user on like
 // Adds user id to post
@@ -160,7 +160,7 @@ User.sync()
 })
 .then(function() {
   return Like.sync();
-})
+});
 // .then(function() {
 //   return Post_Tag.sync();
 // });
