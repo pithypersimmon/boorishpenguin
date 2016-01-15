@@ -1,6 +1,6 @@
 angular.module('boorish.questions', [])
 
-.controller('questionsController', function($scope, $location, Questions, Auth) {
+.controller('questionsController', function($scope, $window, $location, Questions, Auth) {
   $scope.questions = [];
   $scope.trending = [];
 
@@ -17,6 +17,15 @@ angular.module('boorish.questions', [])
     
   };
 
+  $scope.upvote = function(postid) {
+    var obj = {};
+    obj.id_user = localStorage.getItem('com.boorish');
+    obj.id_post = postid;
+    Questions.addLike(obj)
+  }
+
+  //id_user
+  //id_post
 
   // if user is not authenticated, reroute to /signin
   Auth.setUser().then(function(){
