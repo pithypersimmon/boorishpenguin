@@ -123,16 +123,17 @@ var Like = db.define('Like', {
     timestamps: false
 });
 
-var Post_Tag = db.define('Post_Tag', {
-  tag_name: Sequelize.STRING
-  }, {
-    timestamps: false
-});
+// var Post_Tag = db.define('Post_Tag', {
+//   tag_name: Sequelize.STRING
+//   }, {
+//     timestamps: false
+// });
 
-User.hasMany(Post);
-Post.belongsTo(User);
+// User.hasMany(Post);
+// Post.belongsTo(User);
 
-// // set up many to many model for post and user on like
+// set up many to many model for post and user on like
+// Adds user id to post
 User.belongsToMany(Post, {
     through: 'Like'
 });
@@ -141,12 +142,12 @@ Post.belongsToMany(User, {
 });
 
 // // set up many to many model for post and tag on post_tag
-Post.belongsToMany(Tag, {
-    through: 'Post_Tag'
-});
-Tag.belongsToMany(Post, {
-    through: 'Post_Tag'
-});
+// Post.belongsToMany(Tag, {
+//     through: 'Post_Tag'
+// });
+// Tag.belongsToMany(Post, {
+//     through: 'Post_Tag'
+// });
 
 Post.hasMany(Post, {as: 'Responses', foreignKey: 'PostId'});
 
@@ -160,12 +161,12 @@ User.sync()
 .then(function() {
   return Like.sync();
 })
-.then(function() {
-  return Post_Tag.sync();
-});
+// .then(function() {
+//   return Post_Tag.sync();
+// });
 
 exports.User = User;
 exports.Tag = Tag;
 exports.Post = Post;
 exports.Like = Like;
-exports.Like = Post_Tag;
+// exports.Like = Post_Tag;
