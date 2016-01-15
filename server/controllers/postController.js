@@ -6,12 +6,33 @@ module.exports = {
   allProducts: function(req, res) {
     // This is necessary because our Post schema 
     // contains both products and responses
+    // var searchType = {
+    //   home: {
+    //     where: {
+    //       isAResponse: false
+    //     },
+    //     include: [db.User]
+    //   },
+    //   trending: {
+    //     where: {
+    //       isAResponse: false
+    //     },
+    //     order: [["like_count","DESC"]],
+    //     include: [db.User]
+    //   },
+    //   talkedAbout: {   
+    //     where: {
+    //       isAResponse: false
+    //     },
+    //     order: [["response_count","DESC"]],
+    //     include: [db.User]
+    //   }   
+    // };
+
     db.Post.findAll({
       where: {
         isAResponse: false
       },
-      //This creates the rows that are references instead of 
-      //just the numbers
       include: [db.User]
     })
     //Format the array of questions into objects that our
@@ -23,7 +44,8 @@ module.exports = {
           title: product.title,
           text: product.text,
           isAResponse: false,
-          points: product.points,
+          like_count: product.like_count,
+          response_count: product.response_count,
           responses: product.responses,
           createdAt: product.createdAt,
           user: product.User.username,
@@ -61,18 +83,20 @@ module.exports = {
           title: product.title,
           text: product.text,
           isAResponse: false,
-          points: product.points,
+          like_count: product.like_count,
+          response_count: product.response_count,
           responses: product.responses,
           createdAt: product.createdAt,
           user: product.User.username,
           imgUrl: product.User.picture,
           updatedAt: product.updatedAt,
-          provider_url: req.body.provider_url,
-          thumbnail_url: req.body.thumbnail_url,
-          provider_name: req.body.provider_name,
-          thumbnail_width: req.body.thumbnail_width,
-          thumbnail_height: req.body.thumbnail_height,
-          type: req.body.type
+          provider_url: product.provider_url,
+          thumbnail_url: product.thumbnail_url,
+          provider_name: product.provider_name,
+          thumbnail_width: product.thumbnail_width,
+          thumbnail_height: product.thumbnail_height,
+          url: product.url,
+          type: product.type
         };
       });
 
@@ -80,51 +104,79 @@ module.exports = {
       products.results = formattedProducts;
       res.json(products);
     });
-  }
+  },
 
-  /*
-  db.Post.findAll({
-    where: {
-      isAResponse: false
-    },
-    order: [["like_count","DESC"]],
-    
-    //This creates the rows that are references instead of 
-    //just the numbers
-    include: [db.User]
+  allTalkedAbout: function (req, res) {
+    db.Post.findAll({
+      where: {
+        isAResponse: false
+      },
+      order: [["response_count","DESC"]],      
+      //This creates the rows that are references instead of 
+      //just the numbers
+      include: [db.User]
+    })
+    .then(function(products) {
+      var formattedProducts = products.map(function(product) {
+        return {
+          id: product.id,          
+          title: product.title,
+          text: product.text,
+          isAResponse: false,
+          like_count: product.like_count,
+          response_count: product.response_count,
+          responses: product.responses,
+          createdAt: product.createdAt,
+          user: product.User.username,
+          imgUrl: product.User.picture,
+          updatedAt: product.updatedAt,
+          provider_url: product.provider_url,
+          thumbnail_url: product.thumbnail_url,
+          provider_name: product.provider_name,
+          thumbnail_width: product.thumbnail_width,
+          thumbnail_height: product.thumbnail_height,
+          url: product.url,
+          type: product.type
+        };
+      });
 
+      products = {};
+      products.results = formattedProducts;
+      res.json(products);
+    });
+  },
+  
 
+  userInterests: function (req,res) {
 
-  })
-
-  //Find Likes based on user ID
-  db.Likes.findAll(uid, {
-    where: {
-      id: uid
-    }
-    include: [db.Post]
-  })
-  .then(function (likes) {
-  var formatted(Likeds) = likes.map(function(like) {
-          return {
-            id: response.id,
-            text: response.text,
-            isAResponse: true,
-            points: response.points,
-            PostId: pid,
-            user: response.User.name,
-            userid: response.User.id,
-            createdAt: response.createdAt,
-            imgUrl: response.User.picture
-          };
-        });
-  })
+  // db.Likes.findAll(uid, {
+  //   where: {
+  //     id: uid
+  //   }
+  //   include: [db.Post]
+  // })
+  // .then(function (likes) {
+  // var formatted(Likeds) = likes.map(function(like) {
+  //         return {
+  //           id: response.id,
+  //           text: response.text,
+  //           isAResponse: true,
+  //           points: response.points,
+  //           PostId: pid,
+  //           user: response.User.name,
+  //           userid: response.User.id,
+  //           createdAt: response.createdAt,
+  //           imgUrl: response.User.picture
+  //         };
+  //       });
+  // })
   //Only choose the likes that match the user ID
   //Find Post and Responses based on this query
   
+  },
 
 
-  */
+  
   readPost: function(req, res) {
     var pid = req.params.id;
 
