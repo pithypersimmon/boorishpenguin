@@ -44,18 +44,45 @@ module.exports = {
       res.json(products);
     });  
   },
-  /*
-  db.Post.findAll({
-    where: {
-      isAResponse: false
-    },
-    order: [["response_count","DESC"]],
-    
-    //This creates the rows that are references instead of 
-    //just the numbers
-    include: [db.User]
-  })
+  allTrending: function (req, res) {
+    db.Post.findAll({
+      where: {
+        isAResponse: false
+      },
+      order: [["like_count","DESC"]],      
+      //This creates the rows that are references instead of 
+      //just the numbers
+      include: [db.User]
+    })
+    .then(function(products) {
+      var formattedProducts = products.map(function(product) {
+        return {
+          id: product.id,          
+          title: product.title,
+          text: product.text,
+          isAResponse: false,
+          points: product.points,
+          responses: product.responses,
+          createdAt: product.createdAt,
+          user: product.User.username,
+          imgUrl: product.User.picture,
+          updatedAt: product.updatedAt,
+          provider_url: req.body.provider_url,
+          thumbnail_url: req.body.thumbnail_url,
+          provider_name: req.body.provider_name,
+          thumbnail_width: req.body.thumbnail_width,
+          thumbnail_height: req.body.thumbnail_height,
+          type: req.body.type
+        };
+      });
 
+      products = {};
+      products.results = formattedProducts;
+      res.json(products);
+    });
+  }
+
+  /*
   db.Post.findAll({
     where: {
       isAResponse: false
