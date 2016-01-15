@@ -34,6 +34,7 @@ module.exports = {
           provider_name: product.provider_name,
           thumbnail_width: product.thumbnail_width,
           thumbnail_height: product.thumbnail_height,
+          url: product.url,
           type: product.type
         };
       });
