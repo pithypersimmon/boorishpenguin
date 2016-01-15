@@ -11,7 +11,7 @@
       <select class="form-control" name="tagSelect" ng-model="tagOptions.selectedOption" ng-options="option.name for option in tagOptions.availableOptions track by option.id"></select>
     </div>
     <div class="urlInput" ng-init='valid=true'>
-      <input class="form-control" type='url' ng-model="question.url" placeholder="Item URL" ng-keydown="valid=shortenURL.$error.url[0].$valid">
+      <input class="form-control" type='url' ng-model="question.link" placeholder="Item URL" ng-keydown="valid=shortenURL.$error.url[0].$valid">
       <div ng-if="valid === false">
        <p>Invalid!</p>
      </div> 
@@ -23,20 +23,18 @@
     </div>
     <div class="form-group pull-right">
     <input class="btn btn-default" type='reset' value='Cancel'>
-    <input class="btn btn-primary" type='submit' ng-click='addQuestion(); embedder()' value='Ask question'>
+    <input class="btn btn-primary" type='submit' ng-click='addQuestion()' value='Ask question'>
     </div>
   </form>
 </div>
 <br><br>
 <!-- This segment will be moved to the questions page eventually -->
-<div ng-model="question.embedData">
+<!-- <div ng-model="question.embedData">
   <div class="row-fluid">
     <div class="col-md-12">
       <div class="thumbnail">
-        <!-- <img class="col-md-8" src="{{question.embedData.thumbnail_url}}"> -->
         <img class="col-md-8" src="{{question.embedData.thumbnail_url}}">
         <div class="caption">
-          <!-- <h3 class="inline">{{question.embedData.title}}</h3> -->
           <h3>{{question.embedData.title}}</h3>
           <p>{{question.embedData.provider_url}}</p>
           <p><a href="{{question.embedData.provider_url}}" class="btn btn-primary" role="button">Visit</a> <a href="#" class="btn btn-default" role="button">Reviews</a></p>
@@ -44,5 +42,5 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 

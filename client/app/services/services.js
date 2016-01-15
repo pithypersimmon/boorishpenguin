@@ -8,16 +8,10 @@ angular.module('boorish.services', [])
   return {
     // add a question from /ask
     addProduct: function(question) {
-      console.log(question.tag);
       return $http({
         method: 'POST',
         url: '/townhall/posts',
-        data: JSON.stringify({
-          text: question.text,
-          id_user: question.userId,
-          tag: question.tag,  // these are not setup yet
-          title: question.title
-        })
+        data: JSON.stringify(question)
       })
     },
 
@@ -46,7 +40,7 @@ angular.module('boorish.services', [])
     updateQuestion: function(id, mod) {
       return $http({
         method: 'POST',
-        url: 'townhall/questions/' + id,
+        url: 'townhall/products/' + id,
         data: { mod: mod } // possible mods = 'like' to increase like points, 'good' to mark as good (by teacher), 'answered', 'closed'
       })
     },
@@ -55,7 +49,7 @@ angular.module('boorish.services', [])
     removeQuestion: function(questionID) {
       return $http({
         method: 'DELETE',
-        url: 'townhall/questions/' + questionID
+        url: 'townhall/products/' + questionID
       })
     },
     
@@ -113,19 +107,13 @@ angular.module('boorish.services', [])
         url: 'townhall/answers/' + answerID
       })
     }
-
-
-
-
   }
 })
 
 // Users factory handles all requests to add and retrieve users in the database
 
 .factory('Users', function($http, $window){
-
   return {
-
     allUsers: function(){
       return $http({
         method: 'GET',
@@ -162,7 +150,6 @@ angular.module('boorish.services', [])
         })
       })
     }
-
   };
 })
 
@@ -226,7 +213,6 @@ angular.module('boorish.services', [])
   var user = {};
 
   return {
-    
     setUser: function () {
       return $http({
         method: 'GET',
