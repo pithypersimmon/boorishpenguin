@@ -3,7 +3,25 @@
   <h3>Products</h3>
 
     <hr>
-
+<!-- nicks test -->
+      <div ng-repeat='question in questions | filter:searchText | orderBy:"like_count"' class="inline">
+        <div class="col-md-6">
+        <!-- <div class="col-sm-12"> -->
+          <div class="thumbnail">
+            <img src="{{question.thumbnail_url}}">
+            <div class="caption">
+              <h3 class="titler">{{question.title}}</h3>
+              <p>{{question.provider_name}}</p>
+              <p>{{question.provider_url}}</p>
+              <p><a href="{{question.provider_url}}" class="btn btn-primary" role="button">Visit</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+              <button type="button" class="btn btn-success" ng-click="upvote({{question.id}})"><</button>
+              <button type="button" class="btn btn-danger">></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+<!-- nicks test end  -->
       <div ng-repeat='question in questions | filter:searchText | orderBy:"-createdAt"' class="question-list-item">
         <div class="col-sm-2 col-xs-3">
           <div>
