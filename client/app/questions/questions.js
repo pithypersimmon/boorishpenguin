@@ -17,7 +17,7 @@ angular.module('boorish.questions', [])
     
   };
 
-  $scope.upvote = function(postid) {
+  $scope.giveLike = function(postid) {
     var obj = {};
     obj.id_user = localStorage.getItem('com.boorish');
     obj.id_post = postid;
