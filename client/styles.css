@@ -463,3 +463,18 @@ body {
 .prod {
   display: inline-block;
 }
+
+.row-eq-height-md {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+    flex-direction: column;
+}
+.usertag {
+  font-size: 75%;
+  font-color: blue;
+  font-weight: bold;
+}
+
+
