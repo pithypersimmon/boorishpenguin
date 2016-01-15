@@ -132,7 +132,8 @@ var Post_Tag = db.define('Post_Tag', {
 User.hasMany(Post);
 Post.belongsTo(User);
 
-// // set up many to many model for post and user on like
+// set up many to many model for post and user on like
+// Adds user id to post
 User.belongsToMany(Post, {
     through: 'Like'
 });
@@ -168,4 +169,4 @@ exports.User = User;
 exports.Tag = Tag;
 exports.Post = Post;
 exports.Like = Like;
-exports.Like = Post_Tag;
+exports.Post_Tag = Post_Tag;

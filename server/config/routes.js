@@ -5,7 +5,7 @@ var postController = require ('../controllers/postController.js');
 var tagControllers = require ('../controllers/tagControllers.js');
 var likeController = require ('../controllers/likeController.js');
 var passport = require('passport');
-var USER = require("../../client/user")
+var USER = require("../../client/user");
 
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
@@ -15,14 +15,14 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 
 module.exports = function(app, express, ensureAuth) {
 
-  app.get('/townhall/products',  postController.allProducts);
+  app.get('/townhall/products', ensureAuth, postController.allProducts);
   app.get('/townhall/products/:id', ensureAuth, postController.readPost);
 
   app.post('/townhall/posts', ensureAuth, postController.newPost);
   app.delete('/townhall/posts/:id', ensureAuth, postController.deletePost);
   
 
-  // app.put('/townhall/likes/:id', ensureAuth, likeController.post);
+  app.post('/townhall/likes', likeController.likePost);
 
 
 
