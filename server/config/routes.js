@@ -20,7 +20,7 @@ module.exports = function(app, express, ensureAuth) {
 
   app.post('/townhall/posts', ensureAuth, postController.newPost);
   app.delete('/townhall/posts/:id', ensureAuth, postController.deletePost);
-  
+
 
   app.post('/townhall/likes', likeController.likePost);
 
@@ -29,10 +29,6 @@ module.exports = function(app, express, ensureAuth) {
   // app.post('/townhall/answers', ensureAuth, answerControllers.newAnswer);
   // app.post('/townhall/answers/:id', ensureAuth, answerControllers.modAnswer);
   // app.delete('/townhall/answers/:id', ensureAuth, answerControllers.deleteAnswer);
-
-
-
-
   app.get('/townhall/users', ensureAuth, userControllers.allUsers);
   app.get('/townhall/users/:id', ensureAuth, userControllers.oneUser);
   app.post('/townhall/signup', userControllers.newUser);
@@ -40,6 +36,9 @@ module.exports = function(app, express, ensureAuth) {
 
   app.get('/townhall/tags', ensureAuth, tagControllers.allTags);
   app.post('/townhall/tags', ensureAuth, tagControllers.newTags);
+  // app.get('/townhall/tags', tagControllers.allTags);
+  // app.post('/townhall/tags', tagControllers.newTags);
+
 
   // Client does get request to /auth/google on signin
   app.get('/auth/google',
