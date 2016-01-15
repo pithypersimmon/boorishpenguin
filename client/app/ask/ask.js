@@ -68,11 +68,11 @@ angular.module('boorish.ask', [])
     };
 
 
-    var embedder = function(){
-      Questions.embedLink($scope.question.url).then(function(data){
-        $scope.question.embedData = data.data;
-      });
-    }
+    // var embedder = function(){
+    //   Questions.embedLink($scope.question.url).then(function(data){
+    //     $scope.question.embedData = data.data;
+    //   });
+    // }
   }
 
 

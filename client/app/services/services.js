@@ -107,19 +107,13 @@ angular.module('boorish.services', [])
         url: 'townhall/answers/' + answerID
       })
     }
-
-
-
-
   }
 })
 
 // Users factory handles all requests to add and retrieve users in the database
 
 .factory('Users', function($http, $window){
-
   return {
-
     allUsers: function(){
       return $http({
         method: 'GET',
@@ -156,7 +150,6 @@ angular.module('boorish.services', [])
         })
       })
     }
-
   };
 })
 
@@ -220,7 +213,6 @@ angular.module('boorish.services', [])
   var user = {};
 
   return {
-    
     setUser: function () {
       return $http({
         method: 'GET',
