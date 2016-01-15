@@ -8,16 +8,10 @@ angular.module('boorish.services', [])
   return {
     // add a question from /ask
     addProduct: function(question) {
-      console.log(question.tag);
       return $http({
         method: 'POST',
         url: '/townhall/posts',
-        data: JSON.stringify({
-          text: question.text,
-          id_user: question.userId,
-          tag: question.tag,  // these are not setup yet
-          title: question.title
-        })
+        data: JSON.stringify(question)
       })
     },
 

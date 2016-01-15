@@ -11,7 +11,7 @@
       <select class="form-control" name="tagSelect" ng-model="tagOptions.selectedOption" ng-options="option.name for option in tagOptions.availableOptions track by option.id"></select>
     </div>
     <div class="urlInput" ng-init='valid=true'>
-      <input class="form-control" type='url' ng-model="question.url" placeholder="Item URL" ng-keydown="valid=shortenURL.$error.url[0].$valid">
+      <input class="form-control" type='url' ng-model="question.link" placeholder="Item URL" ng-keydown="valid=shortenURL.$error.url[0].$valid">
       <div ng-if="valid === false">
        <p>Invalid!</p>
      </div> 
