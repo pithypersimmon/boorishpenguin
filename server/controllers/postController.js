@@ -240,6 +240,23 @@ module.exports = {
     var pid = req.body.id_question || null;
     var resp = (pid !== null) ? 1 : 0;
     //How are we given type?
+
+    //Increment the Products Response Count if it's a Response
+    if (pid) {
+      // db.Post.upsert({response_count: response_count + 1},
+      //   {
+      //     where: {
+      //       id: pid
+      //     }
+      //   });
+      db.Post.findById(pid)
+      .then(function (post) {
+        post.update({
+          response_count: post.response_count + 1
+        });
+      });
+    }
+
     db.Post.create({
       title: title,
       text: text,
