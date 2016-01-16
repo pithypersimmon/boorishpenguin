@@ -15,8 +15,8 @@
               <p>{{question.provider_name}}</p>
               <p>{{question.provider_url}}</p>
               <p><a href="{{question.url}}" class="btn btn-primary" role="button">Visit</a> <a href='#/products/{{ question.id }}' class="btn btn-default" role="button">Review</a></p>
-              <button type="button" class="btn btn-success" ng-click="giveLike(question.id)"><</button>
-              <button type="button" class="btn btn-danger" ng-click="giveLike(question.id)">></button>
+              <button type="button" class="btn" ng-click="giveLike(question.id)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+              <!--<button type="button" class="btn btn-danger" ng-click="giveLike(question.id)">></button>-->
               <span>{{question.like_count}} likes</span>
               <br>
               <br>
