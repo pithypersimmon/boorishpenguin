@@ -17,7 +17,11 @@
               <p><a href="{{question.url}}" class="btn btn-primary" role="button">Visit</a> <a href='#/products/{{ question.id }}' class="btn btn-default" role="button">Review</a>
               <button type="button" class="btn" ng-click="giveLike(question.id)"><span class="glyphicon glyphicon-thumbs-up"></span></button><span ng-if="question.like_count!==1"> {{question.like_count}} likes</span><span ng-if="question.like_count===1"> {{question.like_count}} like</span></p>
               <!--<button type="button" class="btn btn-danger" ng-click="giveLike(question.id)">></button>-->
-              
+
+              <p ng-repeat='tag in question.tags'>
+                Tag: {{ tag.tag_name }}
+              </p>
+
               <img ng-src="{{ question.imgUrl }}0" width="20" height="20">
               <span class="usertag">{{ question.user }}</span>
               <p class="usertag">{{ question.createdAt | date:"MM/dd/yyyy h:mma"}}</p>
@@ -25,7 +29,7 @@
           </div>
         </div>
       </div>
-    
+
 
   <!--<hr>-->
   </div>

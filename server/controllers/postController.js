@@ -62,9 +62,30 @@ module.exports = {
         };
       });
 
-      products = {};
-      products.results = formattedProducts;
-      res.json(products);
+      db.Post_Tag.findAll()
+        .then(function(tags) {
+          var formattedTags = tags.map(function(tag) {
+            return {
+              tagId: tag.TagId,
+              postId: tag.PostId,
+              tag_name: tag.tag_name
+            };
+          });
+
+          products = {};
+          products.results = formattedProducts.map(function(product) {
+
+            formattedTags.forEach(function(tag) {
+              if (product.id === tag.postId) {
+                product.tags = [];
+                product.tags.push(tag);
+              }
+            })
+            return product;
+          });
+
+          res.json(products);
+        });
     });
   },
   allTrending: function (req, res) {
