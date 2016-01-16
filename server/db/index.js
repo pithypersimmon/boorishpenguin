@@ -28,11 +28,11 @@ var Post = db.define('Post', {
     allowNull: true
   },
   url: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING(1000),
     allowNull: true
   },
   provider_url: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING(1000),
     allowNull: true
   },
   thumbnail_width: {
@@ -44,7 +44,7 @@ var Post = db.define('Post', {
     allowNull: true
   },
   thumbnail_url: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING(1000),
     allowNull: true
   },
   version: {
@@ -81,7 +81,7 @@ var User = db.define('User', {
   fullname: Sequelize.STRING,
   email: Sequelize.STRING,
   image_url: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING(1000),
     allowNull: true,
     defaultValue: false
   },
