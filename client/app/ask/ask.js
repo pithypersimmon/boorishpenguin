@@ -10,18 +10,18 @@ angular.module('boorish.ask', [])
 .controller('askController', function($scope, $window, $location, Tags, Courses, Questions, Auth, Links) {
   $scope.question = {};
   $scope.Email = JSON.parse($window.localStorage.getItem("email"))
-  $scope.savedLinks = [];
+  $scope.savedLinks = [{url: "url", email: "lol"}];
   $scope.getSaved = function(){
     Links.getLinks($scope.Email).then(function(data){
       $scope.savedLinks = data;
     })
   }
   $scope.getSaved();
-  $scope.deleteLink = function(linkId){
-    Links.deleteLink(linkId).then(function(){
-      $scope.getSaved();
-    })
-  }
+  //$scope.deleteLink = function(linkId){
+  //  Links.deleteLink(linkId).then(function(){
+  //    $scope.getSaved();
+  //  })
+  //}
   //TODO(me): link autofill to right data
   $scope.autofill= function(index){
     $scope.question.title = $scope.savedLinks[index].title
