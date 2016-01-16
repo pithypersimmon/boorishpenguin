@@ -72,7 +72,8 @@ module.exports = {
             };
           });
 
-          formattedProducts = formattedProducts.map(function(product) {
+          products = {};
+          products.results = formattedProducts.map(function(product) {
 
             formattedTags.forEach(function(tag) {
               if (product.id === tag.postId) {
@@ -82,7 +83,8 @@ module.exports = {
             })
             return product;
           });
-          res.json(formattedProducts);
+
+          res.json(products);
         });
     });
   },
