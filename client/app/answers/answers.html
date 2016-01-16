@@ -14,12 +14,13 @@
               <img src="{{data.question.thumbnail_url}}">
               <div class="caption">
                 <h3><a ng-href='#/products/{{ data.question.id }}'>{{ data.question.title }}</a></h3>
+                <h4>Review : "{{data.question.text}}"</h4>
                 <p>{{data.question.provider_name}}</p>
                 <p>{{data.question.provider_url}}</p>
-                <p><a href="{{data.question.url}}" class="btn btn-primary" role="button">Visit</a> <a href='#/products/{{ data.question.id }}' class="btn btn-default" role="button">Review</a></p>
-                <button type="button" class="btn btn-success" ng-click="giveLike(data.question.id)"><</button>
-                <button type="button" class="btn btn-danger" ng-click="giveLike(data.question.id)">></button>
-                <span>{{data.question.like_count}} likes</span>
+                <p><a href="{{data.question.url}}" class="btn btn-primary" role="button">Visit</a> <a href='#/products/{{ data.question.id }}' class="btn btn-default" role="button">Review</a>
+                <button type="button" class="btn" ng-click="giveLike(data.question.id)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+                <!--<button type="button" class="btn btn-danger" ng-click="giveLike(data.question.id)">></button>-->
+                <span>{{data.question.like_count}} likes</span></p>
                 <br>
                 <br>
                 <img ng-src="{{ data.question.imgUrl }}0" width="20" height="20">

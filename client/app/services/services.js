@@ -191,16 +191,16 @@ angular.module('boorish.services', [])
 
   return {
 
-    //getLinks: function(id) {
-    //  return $http({
-    //    method: 'GET',
-    //    //TODO: Need route to get trending
-    //    url: '/townhall/getLinks/' + id
-    //  })
-    //  .then(function(res) {
-    //    return res.data;
-    //  });
-    //},
+    getLinks: function(email) {
+      return $http({
+        method: 'GET',
+        //TODO: Need route to get trending
+        url: '/townhall/links/' + email
+      })
+      .then(function(res) {
+        return res.data;
+      });
+    }
     //deleteLink : function(id){
     //  return $http({
     //        method: 'GET',
@@ -282,6 +282,7 @@ angular.module('boorish.services', [])
           if (isUser) {
             $window.localStorage.setItem('com.boorish', user.id);
             $window.localStorage.setItem('image', JSON.stringify(userData.photos[0].value));
+            $window.localStorage.setItem('email', JSON.stringify(userData.emails[0].value));
 
           } else {
             $location.path('/signin');
