@@ -4,7 +4,7 @@ var UCtrl = require('./userControllers.js');
 module.exports = {
   // This is for our home page
   allProducts: function(req, res) {
-    // This is necessary because our Post schema 
+    // This is necessary because our Post schema
     // contains both products and responses
     // var searchType = {
     //   home: {
@@ -20,13 +20,13 @@ module.exports = {
     //     order: [["like_count","DESC"]],
     //     include: [db.User]
     //   },
-    //   talkedAbout: {   
+    //   talkedAbout: {
     //     where: {
     //       isAResponse: false
     //     },
     //     order: [["response_count","DESC"]],
     //     include: [db.User]
-    //   }   
+    //   }
     // };
 
     db.Post.findAll({
@@ -40,7 +40,7 @@ module.exports = {
     .then(function(products) {
       var formattedProducts = products.map(function(product) {
         return {
-          id: product.id,          
+          id: product.id,
           title: product.title,
           text: product.text,
           isAResponse: false,
@@ -65,22 +65,22 @@ module.exports = {
       products = {};
       products.results = formattedProducts;
       res.json(products);
-    });  
+    });
   },
   allTrending: function (req, res) {
     db.Post.findAll({
       where: {
         isAResponse: false
       },
-      order: [["like_count","DESC"]],      
-      //This creates the rows that are references instead of 
+      order: [["like_count","DESC"]],
+      //This creates the rows that are references instead of
       //just the numbers
       include: [db.User]
     })
     .then(function(products) {
       var formattedProducts = products.map(function(product) {
         return {
-          id: product.id,          
+          id: product.id,
           title: product.title,
           text: product.text,
           isAResponse: false,
@@ -113,15 +113,15 @@ module.exports = {
       where: {
         isAResponse: false
       },
-      order: [["response_count","DESC"]],      
-      //This creates the rows that are references instead of 
+      order: [["response_count","DESC"]],
+      //This creates the rows that are references instead of
       //just the numbers
       include: [db.User]
     })
     .then(function(products) {
       var formattedProducts = products.map(function(product) {
         return {
-          id: product.id,          
+          id: product.id,
           title: product.title,
           text: product.text,
           isAResponse: false,
@@ -148,7 +148,7 @@ module.exports = {
       res.json(products);
     });
   },
-  
+
 
   userInterests: function (req,res) {
     var orArr = [];
@@ -174,11 +174,11 @@ module.exports = {
       .then(function(posts){
         res.json(posts);
       });
-    });  
+    });
   },
 
 
-  
+
   readPost: function(req, res) {
     var pid = req.params.id;
 
@@ -300,7 +300,7 @@ module.exports = {
     //Need this to authorize deletion
     var reqName = req.user.profile.emails[0].value;
 
-    //This 
+    //This
 
     // db.Post.findById(pid)
     // .then(function(post) {
@@ -328,23 +328,3 @@ module.exports = {
 
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
