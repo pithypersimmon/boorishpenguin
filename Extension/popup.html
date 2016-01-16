@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+
+<html ng-app="wishListApp" ng-csp>
+  <head>
+    <title>My First Chrome Extension</title>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="js/popup.js"></script>
+    <script src="js/jquery-1.12.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/popup.css">
+    
+  </head>
+  <body ng-controller="wishListCtrl">
+
+     <!-- <div class="message">message : {{ message }}</div> -->
+     <div class="title">Product name: {{ title }}</div>
+     <div class="url">Product url: {{ url }}</div>
+     <input placeholder= "Enter Email" ng-model="email">
+     <!-- <div class="model">tab: {{ response }}</div> -->
+     <button ng-click="process()">Send to List<button>
+  </body>
+</html>
+

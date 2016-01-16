@@ -1,0 +1,8 @@
+{
+  "name": "mvp",
+  "version": "0.0.0",
+  "authors": "",
+  "dependencies": {
+    "angular": "~1.3.16"
+  }
+}
