@@ -3,6 +3,7 @@ angular.module('boorish.questions', [])
 .controller('questionsController', function($scope, $window, $location, Questions, Auth, Trending) {
   $scope.questions = [];
   $scope.trending = [];
+  $scope.isTrend = true;
 
 
   $scope.getProds = function() {
@@ -10,15 +11,21 @@ angular.module('boorish.questions', [])
       $scope.questions = data.results;
     });
   };
-  var getTrends = function() {
+  $scope.getTrends = function() {
     Trending.getTopTrending().then(function(data) {
       $scope.trending = data.results;
     });
   };
+  $scope.getMostTalkedAbout = function() {
+    console.log('boom')
+    Trending.getTalkedAbout().then(function(data){
+      $scope.trending = data.results;
+    })
+  };
 
   $scope.init = function() {
     $scope.getProds();
-    getTrends();
+    $scope.getTrends();
     // Questions.getAllProducts().then(function(data) {
     //   $scope.questions = data.results;
     // });
