@@ -111,7 +111,7 @@ angular.module('boorish.services', [])
     removeAnswer: function(answerID) {
       return $http({
         method: 'DELETE',
-        url: 'townhall/answers/' + answerID
+        url: 'townhall/posts/' + answerID
       })
     }
   }
