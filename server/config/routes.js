@@ -22,7 +22,7 @@ module.exports = function(app, express, ensureAuth) {
 
   app.get('/townhall/products/:id', ensureAuth, postController.readPost);
 
-  app.post('/townhall/posts', postController.newPost);
+  app.post('/townhall/posts', ensureAuth, postController.newPost);
   app.delete('/townhall/posts/:id', ensureAuth, postController.deletePost);
 
 
