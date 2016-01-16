@@ -4,6 +4,7 @@ var userControllers = require ('../controllers/userControllers.js');
 var postController = require ('../controllers/postController.js');
 var tagControllers = require ('../controllers/tagControllers.js');
 var likeController = require ('../controllers/likeController.js');
+var linkController = require ('../controllers/linkController.js');
 var passport = require('passport');
 var USER = require("../../client/user");
 
@@ -27,6 +28,10 @@ module.exports = function(app, express, ensureAuth) {
 
 
   app.post('/townhall/likes',ensureAuth, likeController.likePost);
+
+
+  app.post('/townhall/links', linkController.newLink);
+  app.get('/townhall/links/:email', ensureAuth, linkController.getUserLinks);
 
 
 
