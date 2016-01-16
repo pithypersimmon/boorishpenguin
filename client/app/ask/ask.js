@@ -16,7 +16,15 @@ angular.module('boorish.ask', [])
       $scope.savedLinks = data;
     })
   }
+  $scope.userLinks = [];
+  $scope.getSaved2 = function(){
+    Links.getLinks($scope.userSearch).then(function(data){
+      $scope.userLinks = data;
+    })
+  }
+
   $scope.getSaved();
+  //$scope.getSaved2();
   //$scope.deleteLink = function(linkId){
   //  Links.deleteLink(linkId).then(function(){
   //    $scope.getSaved();
@@ -26,7 +34,7 @@ angular.module('boorish.ask', [])
   $scope.autofill= function(index){
     $scope.question.title = $scope.savedLinks[index].title
     $scope.question.tag = $scope.savedLinks[index].tag
-    $scope.question.url = $scope.savedLinks[index].url
+    $scope.question.link = $scope.savedLinks[index].url
     $scope.question.text = $scope.savedLinks[index].text
     $scope.savedLinks.splice(index, 1);
     // $scope.deleteLink($scope.savedLinks[index].link_id)
