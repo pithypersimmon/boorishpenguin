@@ -246,7 +246,7 @@ module.exports = {
   },
 
 
-  newPost: function(req, res) {
+    newPost: function(req, res) {
     //Used for Post/Response
     var title = req.body.title;
     var text = req.body.text;
@@ -257,6 +257,8 @@ module.exports = {
     //Check to see when we get these and how we get them
     var pid = req.body.id_question || null;
     var resp = (pid !== null) ? 1 : 0;
+
+    var tag = req.body.tag || null;
     //How are we given type?
 
     //Increment the Products Response Count if it's a Response
@@ -290,7 +292,36 @@ module.exports = {
       type: req.body.type || null
     })
     .then(function(post) {
-      res.status(201).json(post);
+      console.log('post: ', post.id);
+
+      if (tag) {
+        db.Tag.findOrCreate({
+          where: { name: tag }
+        })
+        .spread(function(tagArg, created) {
+
+          var tagID = tagArg.id;
+          var tagCount = tagArg.count;
+
+          db.Post_Tag.create({
+            tag_name: tag,
+            TagId: tagID,
+            PostId: post.id
+          })
+          .then(function() {
+            db.Tag.update({
+              count: tagCount + 1
+            }, {
+              where: {
+                id: tagID
+              }
+            })
+            res.status(201).json(post);
+          })
+
+        })
+      }
+
     });
   },
 
