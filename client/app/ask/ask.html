@@ -30,6 +30,7 @@
     <section id="scroll">
     <h3>Saved Links</h3>
     <hr>
+      {{ savedLinks }}
     <li ng-repeat="link in savedLinks track by $index" ng-click="autofill($index)"> {{ link.url }}</li>
     </section>
   </div>
