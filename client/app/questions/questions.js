@@ -1,15 +1,38 @@
 angular.module('boorish.questions', [])
 
-.controller('questionsController', function($scope, $window, $location, Questions, Auth) {
+.controller('questionsController', function($scope, $window, $location, Questions, Auth, Trending) {
   $scope.questions = [];
   $scope.trending = [];
+  $scope.isTrend = true;
 
 
-  $scope.init = function() {
-
+  $scope.getProds = function() {
     Questions.getAllProducts().then(function(data) {
       $scope.questions = data.results;
     });
+  };
+  $scope.getTrends = function() {
+    Trending.getTopTrending().then(function(data) {
+      $scope.trending = data.results;
+    });
+  };
+  $scope.getMostTalkedAbout = function() {
+    console.log('boom')
+    Trending.getTalkedAbout().then(function(data){
+      $scope.trending = data.results;
+    })
+  };
+
+  $scope.init = function() {
+    $scope.getProds();
+    $scope.getTrends();
+    // Questions.getAllProducts().then(function(data) {
+    //   $scope.questions = data.results;
+    // });
+
+    // Trending.getTopTrending().then(function(data) {
+    //   $scope.trending = data.results;
+    // });
 
     // Trending.getTopTrending().then(function(data){
     //   $scope.trending = data.results;
@@ -21,8 +44,10 @@ angular.module('boorish.questions', [])
     var obj = {};
     obj.id_user = localStorage.getItem('com.boorish');
     obj.id_post = postid;
-    Questions.addLike(obj);
-    Questions.getAllProducts();
+    Questions.addLike(obj).then(function(){
+      $scope.getProds();
+    });
+    //$scope.getProds();
   }
 
 

@@ -165,16 +165,24 @@ angular.module('boorish.services', [])
 
   return {
 
-    //getTopTrending: function() {
-    //  return $http({
-    //    method: 'GET',
-    //    //TODO: Need route to get trending
-    //    url: '/townhall/trending'
-    //  })
-    //  .then(function(res) {
-    //    return res.data;
-    //  });
-    //}
+    getTopTrending: function() {
+     return $http({
+       method: 'GET',
+       url: '/townhall/products/trending'
+     })
+     .then(function(res) {
+       return res.data;
+     });
+    },
+    getTalkedAbout: function() {
+      return $http({
+       method: 'GET',
+       url: '/townhall/products/talkedAbout'
+     })
+     .then(function(res) {
+       return res.data;
+     }); 
+    }
 
   };
 })
