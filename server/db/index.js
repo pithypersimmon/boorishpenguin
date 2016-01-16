@@ -129,6 +129,14 @@ var Post_Tag = db.define('Post_Tag', {
     timestamps: false
 });
 
+var Saved_Link = db.define('Saved_Link', {
+  email: Sequelize.STRING,
+  url: Sequelize.STRING,
+  title: Sequelize.STRING
+  }, {
+    timestamps: false
+});
+
 User.hasMany(Post);
 Post.belongsTo(User);
 
@@ -163,6 +171,9 @@ User.sync()
 })
 .then(function() {
   return Post_Tag.sync();
+})
+.then(function() {
+  return Saved_Link.sync();
 });
 
 exports.User = User;
@@ -170,3 +181,4 @@ exports.Tag = Tag;
 exports.Post = Post;
 exports.Like = Like;
 exports.Post_Tag = Post_Tag;
+exports.Saved_Link = Saved_Link;
