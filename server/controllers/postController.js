@@ -49,6 +49,7 @@ module.exports = {
           responses: product.responses,
           createdAt: product.createdAt,
           user: product.User.username,
+          userid: product.User.id,
           imgUrl: product.User.picture,
           updatedAt: product.updatedAt,
           provider_url: product.provider_url,
@@ -88,6 +89,7 @@ module.exports = {
           responses: product.responses,
           createdAt: product.createdAt,
           user: product.User.username,
+          userid: product.User.id,
           imgUrl: product.User.picture,
           updatedAt: product.updatedAt,
           provider_url: product.provider_url,
@@ -128,6 +130,7 @@ module.exports = {
           responses: product.responses,
           createdAt: product.createdAt,
           user: product.User.username,
+          userid: product.User.id,
           imgUrl: product.User.picture,
           updatedAt: product.updatedAt,
           provider_url: product.provider_url,
@@ -148,31 +151,30 @@ module.exports = {
   
 
   userInterests: function (req,res) {
-
-  // db.Likes.findAll(uid, {
-  //   where: {
-  //     id: uid
-  //   }
-  //   include: [db.Post]
-  // })
-  // .then(function (likes) {
-  // var formatted(Likeds) = likes.map(function(like) {
-  //         return {
-  //           id: response.id,
-  //           text: response.text,
-  //           isAResponse: true,
-  //           points: response.points,
-  //           PostId: pid,
-  //           user: response.User.name,
-  //           userid: response.User.id,
-  //           createdAt: response.createdAt,
-  //           imgUrl: response.User.picture
-  //         };
-  //       });
-  // })
-  //Only choose the likes that match the user ID
-  //Find Post and Responses based on this query
-  
+    var orArr = [];
+    db.Like.findAll({
+      where: {
+        UserId: req.params.userid
+      }
+    })
+    .then(function (likes) {
+      var formattedPosts = likes.map(function(like) {
+        return {
+          PostId: like.PostId
+        };
+      });
+      for (var i = 0; i < formattedPosts.length; i ++) {
+        orArr.push({id: formattedPosts[i].PostId});
+      }
+      db.Post.findAll({
+        where: {
+          $or: orArr
+        }
+      })
+      .then(function(posts){
+        res.json(posts);
+      });
+    });  
   },
 
 
