@@ -9,8 +9,8 @@ angular.module('boorish.ask', [])
 
 .controller('askController', function($scope, $window, $location, Tags, Courses, Questions, Auth, Links) {
   $scope.question = {};
-  $scope.Email = parseInt($window.localStorage.getItem("email"))
-  $scope.savedLinks = [{link_id: 1,title:"Test Google Test", tag:"FML", url:"www.google.com", text: "Google test description"}, {link_id: 2, title:"Yahoo test title", tag:"FML", url:"www.yahoo.com", text: "Yahoo test description"}, {link_id: 3, title:"test3", tag:"FML3", url:"www.wow.com", text: "test3"}];
+  $scope.Email = JSON.parse($window.localStorage.getItem("email"))
+  $scope.savedLinks = [];
   $scope.getSaved = function(){
     Links.getLinks($scope.Email).then(function(data){
       $scope.savedLinks = data;
