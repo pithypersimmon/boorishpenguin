@@ -14,7 +14,7 @@
               <!-- <h3 class="titler">{{question.title}}</h3> -->
               <p>{{question.provider_name}}</p>
               <p>{{question.provider_url}}</p>
-              <p><a href="{{question.url}}" class="btn btn-primary" role="button">Visit</a> <a href="#" class="btn btn-default" role="button">Add Tag</a></p>
+              <p><a href="{{question.url}}" class="btn btn-primary" role="button">Visit</a> <a href='#/products/{{ question.id }}' class="btn btn-default" role="button">Review</a></p>
               <button type="button" class="btn btn-success" ng-click="giveLike(question.id)"><</button>
               <button type="button" class="btn btn-danger" ng-click="giveLike(question.id)">></button>
               <span>{{question.like_count}} likes</span>
@@ -43,15 +43,13 @@
       </div>
       <hr>
 
-      <div ng-repeat='trend in trending | filter:searchText | orderBy:"-like_count"' class="trend">
+      <div ng-repeat='trend in trending | filter:searchText' class="trend">
       <div class="col-lg-12">
               <h3>
                   <a ng-href='#/products/{{ trend.id }}'>{{ trend.title }}</a>
               </h3>
               <p ng-if="isTrend">{{trend.like_count}} likes</p>
               <p ng-if="!isTrend">{{trend.response_count}} responses</p>
-          <br>
-
       </div>
       </div>
   </div>

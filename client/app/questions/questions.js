@@ -17,7 +17,6 @@ angular.module('boorish.questions', [])
     });
   };
   $scope.getMostTalkedAbout = function() {
-    console.log('boom')
     Trending.getTalkedAbout().then(function(data){
       $scope.trending = data.results;
     })
@@ -47,7 +46,6 @@ angular.module('boorish.questions', [])
     Questions.addLike(obj).then(function(){
       $scope.getProds();
     });
-    //$scope.getProds();
   }
 
 
