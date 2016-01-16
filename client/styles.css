@@ -490,7 +490,7 @@ body {
 }
 
 .masonry { /* Masonry container */
-    column-count: 0;
+    column-count: 1;
     /*column-gap: 1em;*/
 }
 
@@ -507,16 +507,20 @@ body {
 }*/
 
 .wrapper {
-    width: 95%;
+    width: 99%;
     /*margin: 3em auto;*/
 }
 
 .masonry {
     /*margin: 1.5em 0;*/
-    padding: 0;
+    /*padding: 0;*/
     /*-moz-column-gap: 1.5em;*/
     /*-webkit-column-gap: 1.5em;*/
     /*column-gap: 1.5em;*/
+    /*column-fill: auto;*/
+    /*vertical-align: top;*/
+    break-before: always;
+
 }
 
 .pin {
@@ -526,6 +530,7 @@ body {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    -webkit-column-break-inside: avoid;
     /*box-shadow: 2px 2px 4px 0 #ccc;*/
 }
 
@@ -558,6 +563,7 @@ body {
         -moz-column-count: 3;
         -webkit-column-count: 3;
         column-count: 3;
+        column-fill: balance;
     }
 }
 
