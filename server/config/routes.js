@@ -18,6 +18,7 @@ module.exports = function(app, express, ensureAuth) {
   app.get('/townhall/products', ensureAuth, postController.allProducts);
   app.get('/townhall/products/talkedAbout', ensureAuth, postController.allTalkedAbout);
   app.get('/townhall/products/trending', ensureAuth, postController.allTrending);
+  app.get('/townhall/products/user/:userid',ensureAuth, postController.userInterests);
 
   app.get('/townhall/products/:id', ensureAuth, postController.readPost);
 
@@ -25,7 +26,7 @@ module.exports = function(app, express, ensureAuth) {
   app.delete('/townhall/posts/:id', ensureAuth, postController.deletePost);
 
 
-  app.post('/townhall/likes', likeController.likePost);
+  app.post('/townhall/likes',ensureAuth, likeController.likePost);
 
 
 
