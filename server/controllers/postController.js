@@ -237,10 +237,32 @@ module.exports = {
             imgUrl: response.User.picture
           };
         });
-
-        productAndResponses = {};
+        var productAndResponses = {};
         productAndResponses.results = formattedProduct.concat(formattedResponses);
-        res.json(productAndResponses);
+
+        // Grab associated post tags
+        db.Post_Tag.findAll({
+          where: {
+            postId: pid
+          }
+        })
+        .then(function(tags) {
+          // console.log('tags: ', tags);
+          var formattedTags = tags.map(function(tag) {
+            return {
+              tagId: tag.TagId,
+              postId: tag.PostId,
+              tag_name: tag.tag_name
+            };
+          });
+          // add tags property to product
+          productAndResponses.results = productAndResponses.results.map(function(post) {
+            post.tags = formattedTags;
+            return post;
+          })
+          res.json(productAndResponses);
+        });
+
       });
     });
   },
