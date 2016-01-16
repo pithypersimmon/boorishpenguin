@@ -3,7 +3,7 @@
   <h3>Products</h3>
 
     <hr>
-<!-- nicks test -->
+<!-- products -->
       <div  class="row" style="display:flex; flex-wrap: wrap;">
         <div ng-repeat='question in questions | filter:searchText | orderBy:"-like_count"' class="col-md-4 prod">
         <!-- <div class="col-sm-12"> -->
@@ -28,39 +28,7 @@
         </div>
       </div>
     
-<!-- nicks test end  -->
-      <div ng-repeat='question in questions | filter:searchText | orderBy:"-createdAt"' class="question-list-item">
-        <div class="col-sm-2 col-xs-3">
-          <div>
-            <img ng-src="{{ question.imgUrl }}0" width="50" height="50">
-          </div>
-          <!-- number of points current on question -->
-          <div>
-            <span class="glyphicon glyphicon-heart"></span>
-            <span>{{ question.points }}</span>
-            <span>Likes</span>
-          </div>
 
-          <!-- number of answers current on question -->
-          <div>
-            <span class="glyphicon glyphicon-comment"></span>
-            <span>{{ question.responses }}</span>
-            <span>Answers</span>
-          </div>
-          <!-- link to question id. Title is currently the first 60 characters in the text -->
-        </div>
-        <div class="col-sm-10 col-xs-9">
-          <h3>
-            <a ng-href='#/products/{{ question.id }}'>{{ question.title }}</a>
-            <span class="glyphicon glyphicon-ok-sign" ng-if="question.isGood == true"></span>
-          </h3>
-
-          <div class="Title">{{ question.coursename }}</div>
-          <div class="tag">{{ question.tagname }}</div>
-              <div>- asked by {{ question.user }} at {{ question.createdAt | date:"MM/dd/yyyy 'at' h:mma"}}</div>
-        </div>
-        <hr>
-      </div>
   <!--<hr>-->
   </div>
   <div class="col-md-2">
