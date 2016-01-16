@@ -58,6 +58,7 @@ angular.module('boorish.answers', [])
 
   $scope.updateAnswer = function(index, mod) {
     var answerID = $scope.data.answers[index].id; // pulls the id of the selected answer
+    console.log(answerID)
     Answers.updateAnswer(answerID, mod).then(function() { // passes answerID and modification ('like', 'closed', 'good', or 'answered')
       $scope.getQuestion(); // refreshes the view
     })

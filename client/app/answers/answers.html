@@ -73,7 +73,7 @@
             <img ng-src="{{ answer.imgUrl }}0" width="64" height="64">
           </div>
           <div>
-            <a href="" type='submit'  ng-click='updateAnswer($index, "like")'>
+            <a href="" type='submit'>
               <span class="glyphicon glyphicon-heart" ng-click="giveLike(answer.id)"></span>
               <span>{{ answer.like_count }}</span>
               <span>Likes</span>
@@ -108,7 +108,7 @@
       </div>
       <div class="form-group pull-right">
         <input class="btn btn-default" type='reset' value='Cancel'>
-        <input class="btn btn-primary" type='submit' ng-click='addAnswer()' value='Submit answer'>
+        <input class="btn btn-primary" type='submit' ng-click='addAnswer(); getQuestion()' value='Submit answer'>
       </div>
     </form>
   </div>
